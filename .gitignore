@@ -1,0 +1,4 @@
+.vscode/launch.json
+.vscode/tasks.json
+BlogsApi/wwwroot/*
+BlogsApi/bin/*.dll
