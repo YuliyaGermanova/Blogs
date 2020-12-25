@@ -11,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using BlogsApi.Models;
 
 namespace BlogsApi
 {
@@ -23,9 +24,18 @@ namespace BlogsApi
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
+        // This method gets called by the runtime. Use this method to add services to the container.`
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<ApplicationContext>(options => {
+                options.UseNpgsql(Configuration.GetConnectionString("BlogsConnection"));
+            });
+
+            services.AddTransient<IPostRepository, PostRepository>();
+            services.AddTransient<IPostTypeRepository, PostTypeRepository>();
+            services.AddTransient<IBlogRepository, BlogRepository>();
+            services.AddTransient<IUserRepository, UserRepository>();
+            services.AddMvc();
             services.AddControllers();
         }
 

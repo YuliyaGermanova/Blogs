@@ -1,79 +1,53 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using BlogsApi.Models;
 using Microsoft.AspNetCore.Mvc;
-
 namespace BlogsApi.Controllers
 {
+
     [ApiController]
-    [Route("api/blogs")]
+    [Route("api/blog")]
     public class BlogsController : Controller
     {
-        ApplicationContext db;
+        private IBlogRepository _blog { get; set; }
 
-        public BlogsController(ApplicationContext context)
+        public BlogsController(IBlogRepository blog)
         {
-            db = context;
-            if (!db.Blog.Any())
-            {
-                db.Blog.Add(new Blog
-                {
-                    UserName = "Login1",
-                    ThemaBlogs = "Thema1",
-                    TextBlogs = "Какой-то текст",
-                    DateCreate = DateTime.Now
-                });
-                db.SaveChanges();
-            }
+            _blog = blog; 
         }
         [HttpGet]
         public IEnumerable<Blog> Get()
         {
-            return db.Blog.ToList();
+           return _blog.GetAll();
         }
 
         [HttpGet("{id}")]
         public Blog Get(int id)
         {
-            Blog blog = db.Blog.FirstOrDefault(x => x.Id == id);
-            return blog;
+            return _blog.GetById(id);
         }
 
         [HttpPost]
         public IActionResult Post(Blog blog)
         {
-            if (ModelState.IsValid)
-            {
-                db.Blog.Add(blog);
-                db.SaveChanges();
-                return Ok(blog);
-            }
-            return BadRequest(ModelState);
+             _blog.Add(blog);
+             return Ok(blog);
         }
 
-        [HttpPut]
-        public IActionResult Put(Blog blog)
+        [HttpPut("{id}")]
+        public IActionResult Put(int id, Blog blog)
         {
-            if (ModelState.IsValid)
-            {
-                db.Update(blog);
-                db.SaveChanges();
-                return Ok(blog);
-            }
-            return BadRequest(ModelState);
+            Blog foundedBlog = _blog.GetById(id);
+             _blog.Update(foundedBlog);
+            return Ok(foundedBlog);
         }
 
          [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            Blog blog = db.Blog.FirstOrDefault(x => x.Id == id);
-            if (blog != null)
-            {
-                db.Blog.Remove(blog);
-                db.SaveChanges();
-            }
-            return Ok(blog);
+
+            var post = _blog.GetById(id);
+            _blog.Remove(id);
+            return Ok(post);
         }
 
     }
