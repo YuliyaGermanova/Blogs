@@ -19,32 +19,12 @@ namespace BlogsApi.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 63)
                 .HasAnnotation("ProductVersion", "5.0.1");
 
-            modelBuilder.Entity("BlogsApi.Models.Blog", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .UseIdentityByDefaultColumn();
-
-                    b.Property<int?>("UserId")
-                        .HasColumnType("integer");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Blogs");
-                });
-
             modelBuilder.Entity("BlogsApi.Models.Post", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
                         .UseIdentityByDefaultColumn();
-
-                    b.Property<int?>("BlogId")
-                        .HasColumnType("integer");
 
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("timestamp without time zone");
@@ -55,11 +35,14 @@ namespace BlogsApi.Migrations
                     b.Property<int?>("PostTypeId")
                         .HasColumnType("integer");
 
+                    b.Property<int?>("UserId")
+                        .HasColumnType("integer");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("BlogId");
-
                     b.HasIndex("PostTypeId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Posts");
                 });
@@ -89,41 +72,24 @@ namespace BlogsApi.Migrations
                     b.Property<string>("Login")
                         .HasColumnType("text");
 
-                    b.Property<string>("PasswordHash")
-                        .HasColumnType("text");
-
                     b.HasKey("Id");
 
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("BlogsApi.Models.Blog", b =>
-                {
-                    b.HasOne("BlogsApi.Models.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("BlogsApi.Models.Post", b =>
                 {
-                    b.HasOne("BlogsApi.Models.Blog", "Blog")
-                        .WithMany("Posts")
-                        .HasForeignKey("BlogId");
-
                     b.HasOne("BlogsApi.Models.PostType", "PostType")
                         .WithMany()
                         .HasForeignKey("PostTypeId");
 
-                    b.Navigation("Blog");
+                    b.HasOne("BlogsApi.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
 
                     b.Navigation("PostType");
-                });
 
-            modelBuilder.Entity("BlogsApi.Models.Blog", b =>
-                {
-                    b.Navigation("Posts");
+                    b.Navigation("User");
                 });
 #pragma warning restore 612, 618
         }

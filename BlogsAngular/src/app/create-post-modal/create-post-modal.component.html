@@ -1,0 +1,15 @@
+<mat-form-field>
+  <mat-select matNativeControl [(ngModel)]="selectedPostTypeId" placeholder="Тип поста" [formControl]="inputControl">
+    <mat-option *ngFor="let type of postTypes" [value]="type.id">
+      {{type.name}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+<br>
+
+<mat-form-field class="modal-full-width">
+  <mat-label>Текст поста</mat-label><br>
+  <textarea matInput placeholder="Введите текст..." [(ngModel)]="post.postContent" rows="20" [formControl]="inputControl"></textarea>
+</mat-form-field>
+
+<button mat-raised-button color="primary" (click)="addPost()">Добавить пост</button>

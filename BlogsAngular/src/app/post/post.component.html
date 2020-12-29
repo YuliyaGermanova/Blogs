@@ -1,0 +1,20 @@
+<mat-card>
+  <div [class.post-header]="true">
+    <div>
+      <mat-card-title>{{ Post.postType.name }}</mat-card-title>
+      <mat-card-subtitle>{{ Post.user.login }}</mat-card-subtitle>
+    </div>
+    <small [class.date-elem]="true">{{ Post.createDate }}</small>
+  </div>
+  <p>
+    <mat-card-content>{{ Post.postContent }}</mat-card-content><br>
+  </p>
+  <div [class.control-panel]="true">
+    <button mat-mini-fab color="accent" (click)="changePost()">
+      <mat-icon>edit</mat-icon>
+    </button>
+    <button mat-mini-fab color="warn" (click)="onDelete()">
+      <mat-icon>delete</mat-icon>
+    </button>
+  </div>
+</mat-card>

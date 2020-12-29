@@ -21,6 +21,7 @@ namespace BlogsApi
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
+                    webBuilder.UseWebRoot("static");
                 });
     }
 }

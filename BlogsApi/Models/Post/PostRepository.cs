@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 
 namespace BlogsApi.Models
@@ -17,18 +18,24 @@ namespace BlogsApi.Models
 
         public void Add(Post post)
         {
-            _context.Posts.Add(post);
+            _context.Posts.Update(post);
             _context.SaveChanges();
         }
 
         public Post GetById(int id)
         {
-            return _context.Posts.FirstOrDefault(p => p.Id == id);
+            Post post = _context.Posts.FirstOrDefault(p => p.Id == id);
+            return post;
         }
 
         public IEnumerable<Post> GetAll()
         {
-            return _context.Posts.ToList();
+            List<Post> list = _context.Posts
+                .Include(post => post.PostType)
+                .Include(post => post.User)
+                .ToList();
+
+            return list;
         }
 
         public void Remove(int id)
@@ -38,10 +45,20 @@ namespace BlogsApi.Models
             _context.SaveChanges();
         }
 
-        public void Update(Post post)
+        public Post Update(int id, Post post)
         {
-            _context.Posts.Update(post);
+            Post foundedPost = GetById(id);
+
+            if (foundedPost is null) return null;
+
+            foundedPost.PostContent = post.PostContent;
+            foundedPost.PostType = post.PostType;
+            foundedPost.User = post.User;
+
+            _context.Posts.Update(foundedPost);
             _context.SaveChanges();
+
+            return foundedPost;
         }
     }
 }

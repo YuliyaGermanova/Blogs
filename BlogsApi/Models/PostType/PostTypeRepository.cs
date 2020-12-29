@@ -20,7 +20,8 @@ namespace BlogsApi.Models
 
         public IEnumerable<PostType> GetAll()
         {
-            return _context.PostTypes.ToList();
+            var types = _context.PostTypes.ToList();
+            return types;
         }
 
         public PostType GetById(int id)

@@ -1,30 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Юлия\\Blogs\\BlogsApi\\BlogsApi.csproj": {}
+    "/home/stivooo/Blogs/BlogsApi/BlogsApi.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Юлия\\Blogs\\BlogsApi\\BlogsApi.csproj": {
+    "/home/stivooo/Blogs/BlogsApi/BlogsApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Юлия\\Blogs\\BlogsApi\\BlogsApi.csproj",
+        "projectUniqueName": "/home/stivooo/Blogs/BlogsApi/BlogsApi.csproj",
         "projectName": "BlogsApi",
-        "projectPath": "C:\\Users\\Юлия\\Blogs\\BlogsApi\\BlogsApi.csproj",
-        "packagesPath": "C:\\Users\\Юлия\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Юлия\\Blogs\\BlogsApi\\obj\\",
+        "projectPath": "/home/stivooo/Blogs/BlogsApi/BlogsApi.csproj",
+        "packagesPath": "/home/stivooo/.nuget/packages/",
+        "outputPath": "/home/stivooo/Blogs/BlogsApi/obj/",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Юлия\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "/home/stivooo/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -41,6 +36,10 @@
       "frameworks": {
         "netcoreapp3.1": {
           "dependencies": {
+            "Microsoft.CodeAnalysis@3.7": {
+              "target": "Package",
+              "version": "(, )"
+            },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
               "version": "[5.0.1, )"
@@ -64,6 +63,10 @@
             "Npgsql.EntityFrameworkCore.PostgreSQL": {
               "target": "Package",
               "version": "[5.0.1, )"
+            },
+            "microsoft.entityframeworkcore.analyzers": {
+              "target": "Package",
+              "version": "[5.0.1, )"
             }
           },
           "imports": [
@@ -84,7 +87,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.404\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/3.1.108/RuntimeIdentifierGraph.json"
         }
       }
     }

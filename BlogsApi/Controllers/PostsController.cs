@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using BlogsApi.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
 
 namespace BlogsApi.Controllers
 {
 
     [ApiController]
+    [Produces("application/json")]
     [Route("api/blog/post")]
     public class PostsController : Controller
     {
@@ -24,25 +26,29 @@ namespace BlogsApi.Controllers
         }
 
         [HttpGet("{id}")]
-        public Post Get(int id)
+        public IActionResult Get(int id)
         {
-            return _posts.GetById(id);
+            Post foundedPost = _posts.GetById(id);
+
+            if (foundedPost is null) return NotFound(id);
+
+            return Ok(foundedPost);
         }
 
         [HttpPost]
-        public IActionResult Post(Post post)
+        public IActionResult Post([FromBody] Post post)
         {
              _posts.Add(post);
              return Ok(post);
         }
 
         [HttpPut("{id}")]
-        public IActionResult Put(int id, Post post)
+        public IActionResult Put(int id, [FromBody] Post post)
         {
-            Post foundedPost = _posts.GetById(id);
-            foundedPost.PostContent = post.PostContent;
-             _posts.Update(foundedPost);
-            return Ok(post);
+            Post updated = _posts.Update(id, post);
+            if (updated is null) return NotFound(id);
+
+            return Ok(updated);
         }
 
          [HttpDelete("{id}")]
@@ -50,7 +56,11 @@ namespace BlogsApi.Controllers
         {
 
             var post = _posts.GetById(id);
-            _posts.Remove(id);
+
+            if (post is null) return NotFound(id);
+
+            _posts.Remove(post.Id);
+
             return Ok(post);
         }
 

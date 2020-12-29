@@ -8,6 +8,6 @@ namespace BlogsApi.Models
         IEnumerable<Post> GetAll();
         Post GetById(int id);
         void Remove(int id);
-        void Update(Post post); 
+        Post Update(int id, Post post); 
     }
 }

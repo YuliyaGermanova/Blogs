@@ -10,8 +10,8 @@ namespace BlogsApi.Models
 
         public string PostContent {get;set;}
 
-        public PostType PostType { get; set; }
-        
-        public Blog Blog {get;set;}
+        public virtual User User { get; set; }
+
+        public virtual PostType PostType { get; set; }
     }
 }

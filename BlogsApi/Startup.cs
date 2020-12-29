@@ -12,6 +12,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using BlogsApi.Models;
+using Microsoft.Extensions.FileProviders;
+using System.IO;
 
 namespace BlogsApi
 {
@@ -33,7 +35,6 @@ namespace BlogsApi
 
             services.AddTransient<IPostRepository, PostRepository>();
             services.AddTransient<IPostTypeRepository, PostTypeRepository>();
-            services.AddTransient<IBlogRepository, BlogRepository>();
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddMvc();
             services.AddControllers();
@@ -48,6 +49,8 @@ namespace BlogsApi
             }
 
             app.UseHttpsRedirection();
+
+            app.UseStaticFiles();
 
             app.UseRouting();
 

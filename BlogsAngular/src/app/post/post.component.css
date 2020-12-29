@@ -1,0 +1,23 @@
+.mat-card-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.date-elem {
+  display: block;
+}
+
+.post-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.control-panel {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.control-panel button {
+  margin: 0 5px;
+}

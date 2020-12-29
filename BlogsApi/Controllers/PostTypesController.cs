@@ -7,7 +7,7 @@ namespace BlogsApi.Controllers
 {
 
     [ApiController]
-    [Route("api/blogs/postType")]
+    [Route("api/blog/postType")]
     public class PostsTypesController : Controller
     {
         private IPostTypeRepository _postTypes { get; set; }
